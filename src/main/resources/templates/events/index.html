@@ -13,10 +13,13 @@
     <thead>
     <tr>
         <th>Name</th>
+        <th>Description</th>
     </tr>
     </thead>
-    <tr th:each="event : ${events}">
-        <td th:text="${event}"></td>
+    <tr th:each="event, iterStat : ${events}">
+        <td th:text="${event.key}"></td>
+        <td th:text="${event.value}"></td>
+        <td th:text="${eventLocations[iterStat.index]}"></td>
     </tr>
 </table>
 
