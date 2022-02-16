@@ -24,7 +24,7 @@
     </tr>
 </table>
 -->
-<table class="table table-striped"> <!-- using objects instead of strings -->
+<table th:if="${events} and ${events.size()}" class="table table-striped"> <!-- using objects instead of strings -->
     <thead>
     <tr>
         <th>ID</th>
