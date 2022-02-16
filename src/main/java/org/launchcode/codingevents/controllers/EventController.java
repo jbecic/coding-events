@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ public class EventController {
 //    private static List<String> events = new ArrayList<>();
 //    private static HashMap<String, String> events = new HashMap<String, String>(); //for using array list and hashmap
 //    private static List<String> eventLocations = new ArrayList<>(); //for using array list and hashmap
-    private static List<Event> events = new ArrayList<>();
+//    private static List<Event> events = new ArrayList<>();
 
 //    @GetMapping
 //    public String displayAllEvents(Model model) {
@@ -40,9 +41,17 @@ public class EventController {
 //        return "events/index";
 //    }
 
+//    @GetMapping
+//    public String displayAllEvents(Model model) {
+//        model.addAttribute("title", "All Events");
+//        model.addAttribute("events", events);
+//        return"events/index";
+//    }
+
     @GetMapping
     public String displayAllEvents(Model model) {
-        model.addAttribute("events", events);
+        model.addAttribute("title", "All Events");
+        model.addAttribute("events", EventData.getAll());
         return"events/index";
     }
 
@@ -66,10 +75,17 @@ public class EventController {
 //        return "redirect:";
 //    }
 
+//    // lives at /events/create
+//    @PostMapping("create") //for using array list and hashmap
+//    public String createEvent(@RequestParam String eventName,@RequestParam String eventDescription) {
+//        events.add(new Event(eventName, eventDescription));
+//        return "redirect:";
+//    }
+
     // lives at /events/create
     @PostMapping("create") //for using array list and hashmap
     public String createEvent(@RequestParam String eventName,@RequestParam String eventDescription) {
-        events.add(new Event(eventName, eventDescription));
+        EventData.add(new Event(eventName, eventDescription));
         return "redirect:";
     }
 }
