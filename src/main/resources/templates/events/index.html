@@ -9,6 +9,7 @@
 
 <p th:unless="${events} and ${events.size()}">No events!</p>
 
+<!-- for using array list and hashmap
 <table class="table table-striped">
     <thead>
     <tr>
@@ -22,6 +23,16 @@
         <td th:text="${eventLocations[iterStat.index]}"></td>
     </tr>
 </table>
-
+-->
+<table class="table table-striped"> <!-- using objects instead of strings -->
+    <thead>
+    <tr>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.name}"></td>
+    </tr>
+</table>
 </body>
 </html>

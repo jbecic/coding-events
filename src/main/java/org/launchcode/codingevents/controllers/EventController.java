@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +16,10 @@ import java.util.List;
 @RequestMapping("events")
 public class EventController {
 
-    //private static List<String> events = new ArrayList<>();
-    private static HashMap<String, String> events = new HashMap<String, String>();
-    private static List<String> eventLocations = new ArrayList<>();
+//    private static List<String> events = new ArrayList<>();
+//    private static HashMap<String, String> events = new HashMap<String, String>(); //for using array list and hashmap
+//    private static List<String> eventLocations = new ArrayList<>(); //for using array list and hashmap
+    private static List<Event> events = new ArrayList<>();
 
 //    @GetMapping
 //    public String displayAllEvents(Model model) {
@@ -25,17 +27,23 @@ public class EventController {
 //        return"events/index";
 //    }
 
+//    @GetMapping //for using array list and hashmap
+//    public String displayAllEventsExercises(Model model) {
+//        events.put("Admission Prep Bootcamp Virtual & In Person - 1 week", "Want to learn to code? Join us in this hands-on one-week group training class. This class is excellent for anyone who has never tried coding");
+//        eventLocations.add("Claim Academy 4356 Lindell Blvd. St. Louis, MO 63108 ");
+//        events.put("Thinkful Webinar || Free Crash Course: JavaScript Fundamentals", "Join us and learn how to create a website using the most popular programming language: JavaScript. In this interactive workshop, we'll cover the different data types, variables, functions and more.");
+//        eventLocations.add("Thinkful Webinar Online St. Louis, MO ");
+//        events.put("Innovator Creator Workshop Series", "This is a series of workshops designed for teachers who want to improve their knowledge and skills in maker activities for STEM clubs.");
+//        eventLocations.add("Challenger Learning Center 205 Brotherton Lane St. Louis, MO 63135 ");
+//        model.addAttribute("events", events);
+//        model.addAttribute("eventLocations", eventLocations);
+//        return "events/index";
+//    }
+
     @GetMapping
-    public String displayAllEventsExercises(Model model) {
-        events.put("Admission Prep Bootcamp Virtual & In Person - 1 week", "Want to learn to code? Join us in this hands-on one-week group training class. This class is excellent for anyone who has never tried coding");
-        eventLocations.add("Claim Academy 4356 Lindell Blvd. St. Louis, MO 63108 ");
-        events.put("Thinkful Webinar || Free Crash Course: JavaScript Fundamentals", "Join us and learn how to create a website using the most popular programming language: JavaScript. In this interactive workshop, we'll cover the different data types, variables, functions and more.");
-        eventLocations.add("Thinkful Webinar Online St. Louis, MO ");
-        events.put("Innovator Creator Workshop Series", "This is a series of workshops designed for teachers who want to improve their knowledge and skills in maker activities for STEM clubs.");
-        eventLocations.add("Challenger Learning Center 205 Brotherton Lane St. Louis, MO 63135 ");
+    public String displayAllEvents(Model model) {
         model.addAttribute("events", events);
-        model.addAttribute("eventLocations", eventLocations);
-        return "events/index";
+        return"events/index";
     }
 
     // lives at /events/create
@@ -45,9 +53,23 @@ public class EventController {
     }
 
     // lives at /events/create
-    @PostMapping("create")
-    public String createEvent(@RequestParam String eventName,@RequestParam String eventDescription) {
-        events.put(eventName, eventDescription);
+//    @PostMapping("create") //for using array list
+//    public String createEvent(@RequestParam String eventName) {
+//        events.add(eventName);
+//        return "redirect:";
+//    }
+
+    // lives at /events/create
+//    @PostMapping("create") //for using array list and hashmap
+//    public String createEvent(@RequestParam String eventName,@RequestParam String eventDescription) {
+//        events.put(eventName, eventDescription);
+//        return "redirect:";
+//    }
+
+    // lives at /events/create
+    @PostMapping("create") //for using array list and hashmap
+    public String createEvent(@RequestParam String eventName) {
+        events.add(new Event(eventName));
         return "redirect:";
     }
 }
