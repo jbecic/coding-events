@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class Event {
@@ -20,15 +18,36 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    @NotBlank(message = "Location is required.")
+    @NotNull(message = "Location is required.")
+    @Size(min = 1, max = 50, message = "Location can only be up to 50 characters.")
+    private String location;
+
+    @NotNull(message = "Registration is required.")
+    @AssertTrue(message = "Registration is required.")
+    private Boolean registration;
+
+    @NotNull(message = "Number of attendees is required.")
+    @Min(value = 1, message = "Number of attendees is required.")
+    private int numberOfAttendees;
+
+    private EventType type;
+
+    public Event(String name, String description, String contactEmail, EventType type, String location, Boolean registration, int numberOfAttendees) {
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.type = type;
+        this.location = location;
+        this.registration = registration;
+        this.numberOfAttendees = numberOfAttendees;
+    }
+
+    public Event() {
         this.id = nextId;
         nextId++;
     }
-
-    public Event() {}
 
     public String getName() {
         return name;
@@ -56,6 +75,38 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Boolean getRegistration() {
+        return registration;
+    }
+
+    public void setRegistration(Boolean registration) {
+        this.registration = registration;
+    }
+
+    public int getNumberOfAttendees() {
+        return numberOfAttendees;
+    }
+
+    public void setNumberOfAttendees(int numberOfAttendees) {
+        this.numberOfAttendees = numberOfAttendees;
     }
 
     @Override
